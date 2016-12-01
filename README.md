@@ -1,8 +1,9 @@
 # SAU_Prototipo
 Propuesta Inicial de Prototipo SAU - CITE FLACSO
 
-Este es un proyecto realizado en colaboración con CITE-FLACSO para la propuesta de la creación de un observatorio Urbano.
-El prototipo del observatorio está funcionando en http://sau.polluxdata.com
+Este es un proyecto realizado en colaboración con CITE-FLACSO para la propuesta de indicadores para el análisis urbano en Ecuador junto con la creación de un prototipo de una aplicación para un observatorio urbano nacional.
+
+El prototipo del observatorio relacionado con éste código está funcionando en http://sau.polluxdata.com
 
 En este repositorio se encuentra el código javascript utilizado en el frontal.
 
