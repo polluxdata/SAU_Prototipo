@@ -1,0 +1,68 @@
+/* PALETA AL REDEDOR DE AZUL DE MAS OZCURO A MAS CLARO
+#3399CC
+#38A1C4
+#1DBAD6
+#1ED3E8
+#0AFAFF
+*/
+
+.navbar{
+	min-height: 70px;
+	}
+.btn{
+	min-height: 50px;
+	}
+.map {
+        height: 600px;
+        width: 100%;
+      }
+      
+/* popup style */
+.ol-popup
+		{	max-width:700px;
+			min-width:500px;
+			min-height:1em;
+		}
+		/* Image on popup */
+.ol-popup img 
+		{	float: left;
+			margin: 0 0.5em 0 0;
+			max-width: 100px;
+			max-height: 100px;
+		}
+
+select{
+	width: 100%;
+	background-color: white;
+	}
+	
+.btn{
+	background-color: #FF9933;	
+	}
+	
+.btn-acordeon0,.btn-colapse-eje{
+	width: 100%;
+	background-color: #3399CC;
+	color: white;
+	}
+
+.btn-acordeon1,.btn-acordeon2,.btn-colapse{
+	width: 100%;
+	background-color: #38A1C4;
+	color: white;
+	height: 30px;
+	}
+.btn-propiedad , .btn-propiedad2 , .btn-comparar {
+	width: 100%;
+	background-color: #ffffff;
+	}
+.btn-propiedad.disabled , .btn-propiedad2.disabled , .btn-comparar.disabled {
+	width: 100%;
+	background-color: #eeeeee;
+	color:#bbbbbb;
+	}
+
+.btn-propiedad.active , .btn-propiedad2.active ,  .btn-comparar.active{
+	width: 100%;
+	background-color: #0AFAFF;
+	}

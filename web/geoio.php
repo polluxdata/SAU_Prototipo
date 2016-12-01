@@ -1,0 +1,17 @@
+<?php
+header('Content-Type: application/json');
+//print_r($_SERVER);
+//http://flacso.seyanim.com:8080/geoserver/topp/ows
+//http://flacso.seyanim.com:8080/
+$uri = "http://flacso.seyanim.com:8080/geoserver/indurb/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=indurb:circuitos&maxFeatures=50&outputFormat=application%2Fjson"; 
+$json = file_get_contents($uri);
+
+//$file = "cache/".hash('md5',$json).".json";
+$file = "cache/"."circuitos".".json";
+
+if(!file_exists($file)){
+	file_put_contents($file,$json);
+}
+
+echo exec ( "topojson $file" );
+

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./lib/ol-3.18/ol.css" type="text/css">
+    <style>
+      .map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+    <script src="./lib/ol-3.18/ol.js" type="text/javascript"></script>
+    <title>OpenLayers 3 example</title>
+  </head>
+  <body>
+    <h2>My Map</h2>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+      
+
+   /*  var circuito = new ol.layer.Vector ({
+         source: new ol.source.Vector({
+            url: 'http://flacso.seyanim.com:8080/geoserver/indurb/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=indurb:circuitos2&srsName=EPSG:32717&bbox=608253.02,9745978.19,637388.08,9778028.48',
+            format: new ol.format.WFS ({
+                
+            })
+         })
+     }); */
+    
+     var styleCache ={};
+     
+     
+     var styleFunction = function (feature, resolution) {
+     			console.log(feature);
+     			console.log(feature.getGeometry());
+     			console.log(feature.getGeometry().getCoordinates());
+            var geometries = feature.getGeometry().getGeometries();
+            var start = geometries[0];
+            var line = geometries[1];
+            var end = geometries[2];
+
+            var startStyle = new ol.style.Style({
+                geometry: start,
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: '#32CD32'
+                    })
+                })
+            });
+
+            var endStyle = new ol.style.Style({
+                geometry: end,
+                image: new ol.style.Circle({
+                    radius: 7,
+                    fill: new ol.style.Fill({
+                        color: '#FF4500',
+                        opacity: 0.8
+                    })
+                })
+            });
+
+            var lineStyle = new ol.style.Style({
+                geometry: line,
+                fill: new ol.style.Fill({
+                        color: 'rgba(255, 255, 255, 0.2)',
+                        weight: 4
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: '#808080',
+                        width: 4
+                    })
+            });
+
+            return [startStyle, lineStyle, endStyle];
+
+        };
+        
+        
+     var raster = new ol.layer.Tile({
+         source: new ol.source.Stamen({
+         layer: 'toner'
+          })
+        });
+      
+      
+      var puntos = new ol.layer.Vector({
+         source: new ol.source.Vector({
+            //GYE
+            url: 'http://flacso.seyanim.com:8080/geoserver/indurb/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=indurb:circuitos2&srsName=EPSG:32717&bbox=608253.02,9745978.19,637388.08,9778028.48&outputFormat=KML',
+            //url: 'http://flacso.seyanim.com:8080/geoserver/indurb/wfs?service=wfs&version=2.0.0&request=GetFeature&typeNames=indurb:circuitos2&srsName=EPSG:32717&outputFormat=KML', 
+            format: new ol.format.KML ({
+                 extractStyles: false
+             })
+         })
+      });
+      
+     console.log(puntos);
+        
+      var map = new ol.Map({
+        target: 'map',
+        layers: [raster,puntos],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-78.25, -1.8]),
+          zoom: 6,
+          maxZoom:14,
+          minZoom:6
+        })
+      });
+      
+/*var info = $('dpa_parroq');
+  info.tooltip({
+  animation: false,
+  trigger: 'manual'
+});*/
+
+var displayFeatureInfo = function(pixel) {
+  /*info.css({
+    left: pixel[0] + 'px',
+    top: (pixel[1] - 15) + 'px'
+  });*/
+  var feature = map.forEachFeatureAtPixel(pixel, function(feature, layer) {
+    return feature;
+  });
+  if (feature) {
+    /*info.tooltip('hide')
+        .attr('data-original-title', feature.get('name'))
+        .tooltip('fixTitle')
+        .tooltip('show');*/
+  } else {
+    //info.tooltip('hide');
+  }
+};
+
+map.on('pointermove', function(evt) {
+  if (evt.dragging) {
+    //info.tooltip('hide');
+    return;
+  }
+  displayFeatureInfo(map.getEventPixel(evt.originalEvent));
+});
+
+map.on('click', function(evt) {
+  displayFeatureInfo(evt.pixel);
+});
+
+
+      
+    </script>
+  </body>
+</html>
